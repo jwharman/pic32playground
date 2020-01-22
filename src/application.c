@@ -21,6 +21,8 @@ static uint8_t spiCounter;
 
 static uint16_t dataCounter;
 
+static uint16_t address;
+
 void application_init(void)
 {
     pinState = false;
@@ -31,44 +33,39 @@ void application_init(void)
     
     printf("***Application Initialized***\r\n");
     
-    printf("writing FRAM values: 0x5A at 0x000 \r\n");
+    //init the FRAM PINS to a good state
+    FRAM_HOLD = 1;
+    FRAM_CS = 1;
+    FRAM_WP = 0;
     
-    byte_write_at_index(0,0x5A);
+    address = 0;
+   
+    
+    
     
 }
 
 void application_service(void)
 {
      if(user_timer_interval(&m_main_tmr, 100)) //every 100 ms
-        {
-            counter++;
-      
+        {   
+            
+            //write8(1, 1);
+         
+            uint32_t devID = readDeviceID();
+         
+            printf("Attempting to read device ID: 0x%lX\r\n", devID);
+            
+//            uint32_t status = readStatusRegister();
+//            
+//            printf("Attempting to read status register: 0x%lX\r\n", status);
+         
             pinState = !pinState;
+
             
-             //printf("counter: %llu\r\n", counter);
-             
-             
-             
-             if(dataCounter < 0x1FFF)
-             {
-                 
-//                 byte_write_at_index(dataCounter, (uint8_t)(dataCounter & 0xFF));
-//                 
-//                 uint8_t data = byte_read_at_index(dataCounter);
-//                 printf("FRAM address: 0x%X : 0x%X \r\n", dataCounter, data);
-//                 dataCounter++;
-             }
-             else
-             {
-                 dataCounter = 0;
-             }
             
-             
-             //FRAM_service();
-             
+            counter++;
         }
-     
-    
      
      BLUE_LED = pinState;
 }

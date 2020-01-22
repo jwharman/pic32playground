@@ -66,6 +66,10 @@ static void sys_raw_io_config()
     ANSELC = 0;
     ANSELD = 0;
     
+    
+    //set TRIS B 14 to be input for SDI
+    TRISBbits.TRISB14 = 1; //make it an input
+    
 }
 
 

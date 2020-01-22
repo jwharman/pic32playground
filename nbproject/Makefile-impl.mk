@@ -24,7 +24,7 @@ CLEAN_SUBPROJECTS=${CLEAN_SUBPROJECTS_${SUBPROJECTS}}
 
 
 # Project Name
-PROJECTNAME=pic32playground.X
+PROJECTNAME=pic32playground
 
 # Active Configuration
 DEFAULTCONF=default

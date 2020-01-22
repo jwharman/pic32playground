@@ -63,9 +63,19 @@ void SPI1_init()
     
     SPI1BRG = 11; //set for 1MHZ operation
     
+    //SPI1BRG = 5;
+    
+    //clear out the buffer
+    while(SPI1STATbits.RXBUFELM > 0)
+    {
+        SPI1BUF;
+    }
+    
     
     //now finally, turn it on
     SPI1CONbits.ON = 1; //enable the SPI1 peripheral
+    
+    SPI1BUF;
     
 }
 
@@ -91,6 +101,58 @@ void SPI1_tx32(uint32_t dataTx)
     SPI1BUF = (uint32_t)dataTx;
     
 }
+
+
+
+uint8_t SPI1_tx8_ret(uint8_t dataTx)
+{
+    SPI1CONbits.MODE32 = 0;
+    SPI1CONbits.MODE16 = 0;
+    SPI1BUF = dataTx;
+    
+    //while(!SPI1STATbits.SPIRBF);
+    
+    while(SPI1STATbits.SPIBUSY)
+    {
+        //wait while the SPI transmits
+    }
+    
+    return (uint8_t) SPI1BUF;
+    
+}
+uint16_t SPI1_tx16_ret(uint16_t dataTx)
+{
+    SPI1CONbits.MODE32 = 0;
+    SPI1CONbits.MODE16 = 1;
+    SPI1BUF = (uint32_t)dataTx;
+    
+    //while(!SPI1STATbits.SPIRBF);
+    
+    while(SPI1STATbits.SPIBUSY)
+    {
+        //wait while the SPI transmits
+    }
+    
+    return (uint16_t)SPI1BUF;
+    
+}
+uint32_t SPI1_tx32_ret(uint32_t dataTx)
+{
+    SPI1CONbits.MODE32 = 1;
+    SPI1CONbits.MODE16 = 0;
+    SPI1BUF = (uint32_t)dataTx;
+    
+    while(SPI1STATbits.SPIBUSY)
+    {
+        //wait while the SPI transmits
+    }
+    
+    return (uint32_t)SPI1BUF;
+    
+}
+
+
+
 
 uint8_t SPI1_rx8(void)
 {
