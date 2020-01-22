@@ -36,7 +36,7 @@ void SPI1_init()
     SPI1CONbits.MODE16 = 0;
     
     //sampling and polarity
-    SPI1CONbits.SMP = 1; //sample at the end of data output time
+    SPI1CONbits.SMP = 0; //sample at the start of data output time
     SPI1CONbits.CKE = 0; //serial output data changes from idle to active
     SPI1CONbits.CKP = 0; //active high clock polarity
     
@@ -110,13 +110,14 @@ uint8_t SPI1_tx8_ret(uint8_t dataTx)
     SPI1CONbits.MODE16 = 0;
     SPI1BUF = dataTx;
     
-    //while(!SPI1STATbits.SPIRBF);
+    while(SPI1STATbits.SPIRBE);
     
-    while(SPI1STATbits.SPIBUSY)
-    {
-        //wait while the SPI transmits
-    }
+//    while(SPI1STATbits.SPIBUSY)
+//    {
+//        //wait while the SPI transmits
+//    }
     
+   
     return (uint8_t) SPI1BUF;
     
 }
@@ -126,13 +127,15 @@ uint16_t SPI1_tx16_ret(uint16_t dataTx)
     SPI1CONbits.MODE16 = 1;
     SPI1BUF = (uint32_t)dataTx;
     
-    //while(!SPI1STATbits.SPIRBF);
+      while(SPI1STATbits.SPIRBE);
     
-    while(SPI1STATbits.SPIBUSY)
-    {
-        //wait while the SPI transmits
-    }
+//    while(SPI1STATbits.SPIBUSY)
+//    {
+//        //wait while the SPI transmits
+//    }
     
+     
+      
     return (uint16_t)SPI1BUF;
     
 }
@@ -142,10 +145,13 @@ uint32_t SPI1_tx32_ret(uint32_t dataTx)
     SPI1CONbits.MODE16 = 0;
     SPI1BUF = (uint32_t)dataTx;
     
-    while(SPI1STATbits.SPIBUSY)
-    {
-        //wait while the SPI transmits
-    }
+      while(SPI1STATbits.SPIRBE);
+    
+//    while(SPI1STATbits.SPIBUSY)
+//    {
+//        //wait while the SPI transmits
+//    }
+       
     
     return (uint32_t)SPI1BUF;
     
