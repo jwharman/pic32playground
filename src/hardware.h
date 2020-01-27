@@ -16,7 +16,7 @@
 
 #include "mb85rs64v.h"
 
-#define SYS_CLOCK          24000000    //Clock speed 12 Mhz
+#define SYS_CLOCK          24000000    //Clock speed 24 Mhz
 #define UartBAUD           115200    
 
 ////////////////

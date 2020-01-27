@@ -57,17 +57,17 @@ OBJECTDIR=build/${CND_CONF}/${IMAGE_TYPE}
 DISTDIR=dist/${CND_CONF}/${IMAGE_TYPE}
 
 # Source Files Quoted if spaced
-SOURCEFILES_QUOTED_IF_SPACED=src/mb85rs64v.c src/application.c src/spi1.c src/spi2.c src/spi3.c src/uart.c src/uart_handler.c src/hardware.c src/sys_interrupt.c src/timer1.c src/system_tick.c src/user_timer.c src/debug.c src/main.c
+SOURCEFILES_QUOTED_IF_SPACED=src/mb85rs64v.c src/application.c src/spi1.c src/spi2.c src/spi3.c src/uart.c src/uart_handler.c src/hardware.c src/sys_interrupt.c src/timer1.c src/system_tick.c src/user_timer.c src/debug.c src/main.c src/i2c1.c src/adc.c
 
 # Object Files Quoted if spaced
-OBJECTFILES_QUOTED_IF_SPACED=${OBJECTDIR}/src/mb85rs64v.o ${OBJECTDIR}/src/application.o ${OBJECTDIR}/src/spi1.o ${OBJECTDIR}/src/spi2.o ${OBJECTDIR}/src/spi3.o ${OBJECTDIR}/src/uart.o ${OBJECTDIR}/src/uart_handler.o ${OBJECTDIR}/src/hardware.o ${OBJECTDIR}/src/sys_interrupt.o ${OBJECTDIR}/src/timer1.o ${OBJECTDIR}/src/system_tick.o ${OBJECTDIR}/src/user_timer.o ${OBJECTDIR}/src/debug.o ${OBJECTDIR}/src/main.o
-POSSIBLE_DEPFILES=${OBJECTDIR}/src/mb85rs64v.o.d ${OBJECTDIR}/src/application.o.d ${OBJECTDIR}/src/spi1.o.d ${OBJECTDIR}/src/spi2.o.d ${OBJECTDIR}/src/spi3.o.d ${OBJECTDIR}/src/uart.o.d ${OBJECTDIR}/src/uart_handler.o.d ${OBJECTDIR}/src/hardware.o.d ${OBJECTDIR}/src/sys_interrupt.o.d ${OBJECTDIR}/src/timer1.o.d ${OBJECTDIR}/src/system_tick.o.d ${OBJECTDIR}/src/user_timer.o.d ${OBJECTDIR}/src/debug.o.d ${OBJECTDIR}/src/main.o.d
+OBJECTFILES_QUOTED_IF_SPACED=${OBJECTDIR}/src/mb85rs64v.o ${OBJECTDIR}/src/application.o ${OBJECTDIR}/src/spi1.o ${OBJECTDIR}/src/spi2.o ${OBJECTDIR}/src/spi3.o ${OBJECTDIR}/src/uart.o ${OBJECTDIR}/src/uart_handler.o ${OBJECTDIR}/src/hardware.o ${OBJECTDIR}/src/sys_interrupt.o ${OBJECTDIR}/src/timer1.o ${OBJECTDIR}/src/system_tick.o ${OBJECTDIR}/src/user_timer.o ${OBJECTDIR}/src/debug.o ${OBJECTDIR}/src/main.o ${OBJECTDIR}/src/i2c1.o ${OBJECTDIR}/src/adc.o
+POSSIBLE_DEPFILES=${OBJECTDIR}/src/mb85rs64v.o.d ${OBJECTDIR}/src/application.o.d ${OBJECTDIR}/src/spi1.o.d ${OBJECTDIR}/src/spi2.o.d ${OBJECTDIR}/src/spi3.o.d ${OBJECTDIR}/src/uart.o.d ${OBJECTDIR}/src/uart_handler.o.d ${OBJECTDIR}/src/hardware.o.d ${OBJECTDIR}/src/sys_interrupt.o.d ${OBJECTDIR}/src/timer1.o.d ${OBJECTDIR}/src/system_tick.o.d ${OBJECTDIR}/src/user_timer.o.d ${OBJECTDIR}/src/debug.o.d ${OBJECTDIR}/src/main.o.d ${OBJECTDIR}/src/i2c1.o.d ${OBJECTDIR}/src/adc.o.d
 
 # Object Files
-OBJECTFILES=${OBJECTDIR}/src/mb85rs64v.o ${OBJECTDIR}/src/application.o ${OBJECTDIR}/src/spi1.o ${OBJECTDIR}/src/spi2.o ${OBJECTDIR}/src/spi3.o ${OBJECTDIR}/src/uart.o ${OBJECTDIR}/src/uart_handler.o ${OBJECTDIR}/src/hardware.o ${OBJECTDIR}/src/sys_interrupt.o ${OBJECTDIR}/src/timer1.o ${OBJECTDIR}/src/system_tick.o ${OBJECTDIR}/src/user_timer.o ${OBJECTDIR}/src/debug.o ${OBJECTDIR}/src/main.o
+OBJECTFILES=${OBJECTDIR}/src/mb85rs64v.o ${OBJECTDIR}/src/application.o ${OBJECTDIR}/src/spi1.o ${OBJECTDIR}/src/spi2.o ${OBJECTDIR}/src/spi3.o ${OBJECTDIR}/src/uart.o ${OBJECTDIR}/src/uart_handler.o ${OBJECTDIR}/src/hardware.o ${OBJECTDIR}/src/sys_interrupt.o ${OBJECTDIR}/src/timer1.o ${OBJECTDIR}/src/system_tick.o ${OBJECTDIR}/src/user_timer.o ${OBJECTDIR}/src/debug.o ${OBJECTDIR}/src/main.o ${OBJECTDIR}/src/i2c1.o ${OBJECTDIR}/src/adc.o
 
 # Source Files
-SOURCEFILES=src/mb85rs64v.c src/application.c src/spi1.c src/spi2.c src/spi3.c src/uart.c src/uart_handler.c src/hardware.c src/sys_interrupt.c src/timer1.c src/system_tick.c src/user_timer.c src/debug.c src/main.c
+SOURCEFILES=src/mb85rs64v.c src/application.c src/spi1.c src/spi2.c src/spi3.c src/uart.c src/uart_handler.c src/hardware.c src/sys_interrupt.c src/timer1.c src/system_tick.c src/user_timer.c src/debug.c src/main.c src/i2c1.c src/adc.c
 
 
 
@@ -191,6 +191,18 @@ ${OBJECTDIR}/src/main.o: src/main.c  nbproject/Makefile-${CND_CONF}.mk
 	@${RM} ${OBJECTDIR}/src/main.o 
 	@${FIXDEPS} "${OBJECTDIR}/src/main.o.d" $(SILENT) -rsi ${MP_CC_DIR}../  -c ${MP_CC}  $(MP_EXTRA_CC_PRE) -g -D__DEBUG   -fframe-base-loclist  -x c -c -mprocessor=$(MP_PROCESSOR_OPTION)  -MMD -MF "${OBJECTDIR}/src/main.o.d" -o ${OBJECTDIR}/src/main.o src/main.c    -DXPRJ_default=$(CND_CONF)  -legacy-libc  $(COMPARISON_BUILD)  -mdfp=${DFP_DIR}
 	
+${OBJECTDIR}/src/i2c1.o: src/i2c1.c  nbproject/Makefile-${CND_CONF}.mk
+	@${MKDIR} "${OBJECTDIR}/src" 
+	@${RM} ${OBJECTDIR}/src/i2c1.o.d 
+	@${RM} ${OBJECTDIR}/src/i2c1.o 
+	@${FIXDEPS} "${OBJECTDIR}/src/i2c1.o.d" $(SILENT) -rsi ${MP_CC_DIR}../  -c ${MP_CC}  $(MP_EXTRA_CC_PRE) -g -D__DEBUG   -fframe-base-loclist  -x c -c -mprocessor=$(MP_PROCESSOR_OPTION)  -MMD -MF "${OBJECTDIR}/src/i2c1.o.d" -o ${OBJECTDIR}/src/i2c1.o src/i2c1.c    -DXPRJ_default=$(CND_CONF)  -legacy-libc  $(COMPARISON_BUILD)  -mdfp=${DFP_DIR}
+	
+${OBJECTDIR}/src/adc.o: src/adc.c  nbproject/Makefile-${CND_CONF}.mk
+	@${MKDIR} "${OBJECTDIR}/src" 
+	@${RM} ${OBJECTDIR}/src/adc.o.d 
+	@${RM} ${OBJECTDIR}/src/adc.o 
+	@${FIXDEPS} "${OBJECTDIR}/src/adc.o.d" $(SILENT) -rsi ${MP_CC_DIR}../  -c ${MP_CC}  $(MP_EXTRA_CC_PRE) -g -D__DEBUG   -fframe-base-loclist  -x c -c -mprocessor=$(MP_PROCESSOR_OPTION)  -MMD -MF "${OBJECTDIR}/src/adc.o.d" -o ${OBJECTDIR}/src/adc.o src/adc.c    -DXPRJ_default=$(CND_CONF)  -legacy-libc  $(COMPARISON_BUILD)  -mdfp=${DFP_DIR}
+	
 else
 ${OBJECTDIR}/src/mb85rs64v.o: src/mb85rs64v.c  nbproject/Makefile-${CND_CONF}.mk
 	@${MKDIR} "${OBJECTDIR}/src" 
@@ -275,6 +287,18 @@ ${OBJECTDIR}/src/main.o: src/main.c  nbproject/Makefile-${CND_CONF}.mk
 	@${RM} ${OBJECTDIR}/src/main.o.d 
 	@${RM} ${OBJECTDIR}/src/main.o 
 	@${FIXDEPS} "${OBJECTDIR}/src/main.o.d" $(SILENT) -rsi ${MP_CC_DIR}../  -c ${MP_CC}  $(MP_EXTRA_CC_PRE)  -g -x c -c -mprocessor=$(MP_PROCESSOR_OPTION)  -MMD -MF "${OBJECTDIR}/src/main.o.d" -o ${OBJECTDIR}/src/main.o src/main.c    -DXPRJ_default=$(CND_CONF)  -legacy-libc  $(COMPARISON_BUILD)  -mdfp=${DFP_DIR}
+	
+${OBJECTDIR}/src/i2c1.o: src/i2c1.c  nbproject/Makefile-${CND_CONF}.mk
+	@${MKDIR} "${OBJECTDIR}/src" 
+	@${RM} ${OBJECTDIR}/src/i2c1.o.d 
+	@${RM} ${OBJECTDIR}/src/i2c1.o 
+	@${FIXDEPS} "${OBJECTDIR}/src/i2c1.o.d" $(SILENT) -rsi ${MP_CC_DIR}../  -c ${MP_CC}  $(MP_EXTRA_CC_PRE)  -g -x c -c -mprocessor=$(MP_PROCESSOR_OPTION)  -MMD -MF "${OBJECTDIR}/src/i2c1.o.d" -o ${OBJECTDIR}/src/i2c1.o src/i2c1.c    -DXPRJ_default=$(CND_CONF)  -legacy-libc  $(COMPARISON_BUILD)  -mdfp=${DFP_DIR}
+	
+${OBJECTDIR}/src/adc.o: src/adc.c  nbproject/Makefile-${CND_CONF}.mk
+	@${MKDIR} "${OBJECTDIR}/src" 
+	@${RM} ${OBJECTDIR}/src/adc.o.d 
+	@${RM} ${OBJECTDIR}/src/adc.o 
+	@${FIXDEPS} "${OBJECTDIR}/src/adc.o.d" $(SILENT) -rsi ${MP_CC_DIR}../  -c ${MP_CC}  $(MP_EXTRA_CC_PRE)  -g -x c -c -mprocessor=$(MP_PROCESSOR_OPTION)  -MMD -MF "${OBJECTDIR}/src/adc.o.d" -o ${OBJECTDIR}/src/adc.o src/adc.c    -DXPRJ_default=$(CND_CONF)  -legacy-libc  $(COMPARISON_BUILD)  -mdfp=${DFP_DIR}
 	
 endif
 

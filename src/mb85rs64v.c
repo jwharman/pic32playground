@@ -12,8 +12,7 @@
 //static uint32_t readDeviceID(void);
 //static uint32_t readStatusRegister(void);
 
-static void dumpFRAM(void);
-static void fillFRAM(void);
+
 
 //static void writeEnable(bool enable);
 //static void write8(uint32_t address, uint8_t value);
@@ -43,20 +42,11 @@ void writeEnable(bool enable)
   
   if(enable)
   {
-      SPI1_tx8(FRAM_OP_WREN);
-      
-      while(SPI1STATbits.SPIBUSY)
-        {
-            //wait while the SPI transmits
-        }
+      SPI1_tx8_ret(FRAM_OP_WREN);
   }
   else
   {
-      SPI1_tx8(FRAM_OP_WRDI);
-      while(SPI1STATbits.SPIBUSY)
-        {
-            //wait while the SPI transmits
-        }
+      SPI1_tx8_ret(FRAM_OP_WRDI);
   }
   FRAM_CS = 1; //deselect the FRAM (active low)
   FRAM_WP = 0; //activate the write protect
@@ -71,7 +61,6 @@ void write8(uint32_t address, uint8_t value)
   FRAM_CS = 0; //select the FRAM (active low)
   FRAM_WP = 1; //disable write protect (active low)
  
-  
   uint8_t addrH = (uint8_t) (((address & 0x0000FF00) >> 8));
   uint8_t addrL = (uint8_t) (address & 0x000000FF);
   
@@ -88,23 +77,9 @@ void write8(uint32_t address, uint8_t value)
   
   txPKT += value;
   
-  SPI1_tx32(txPKT);
-  
-  while(SPI1STATbits.SRMT != 1)
-  {
-      //wait for us to transmit
-  }
-  
-  
-//  while(SPI1STATbits.SPIBUSY)
-//    {
-//        //wait while the SPI transmits
-//    }
-  
+  SPI1_tx32_ret(txPKT);
+
   FRAM_CS = 1; //deselect the FRAM (active low)
-  
-  writeEnable(false);
-  
 }
 
 
@@ -270,35 +245,7 @@ uint32_t readDeviceID(void)
     
     FRAM_CS = 1;
     
-    return ret;
-    
-    
-//    SPI1_tx8(txCode);
-//    while(SPI1STATbits.SPIBUSY)
-//    {
-//        //wait while the SPI transmits
-//    }
-//    SPI1_tx32(0);
-//    
-//    //read 8 bits from SPI
-//    
-//    
-//    
-//    while(SPI1STATbits.SPIBUSY)
-//    {
-//        //wait while the SPI transmits
-//    }
-//    
-//    uint32_t status = SPI1_rx32();
-//    
-//    FRAM_CS = 1; //select the chip (active low)
-//    FRAM_HOLD = 1; //SPI command hold is off (active low)
-//    FRAM_WP = 1; //write protect on
-//    
-//    printf("FRAM Device ID: %lu\r\n", status);
-//    return status;
-    
-    
+    return ret;    
 }
 
 uint32_t readStatusRegister(void)
@@ -324,7 +271,7 @@ uint32_t readStatusRegister(void)
 
 }
 
-static void dumpFRAM(void)
+void dumpFRAM(void)
 {
     FRAM_CS = 0; //select the chip (active low)
     FRAM_HOLD = 1; //SPI command hold is off (active low)
@@ -367,25 +314,18 @@ static void dumpFRAM(void)
     
 }
 
-static void fillFRAM(void)
+void fillFRAM(void)
 {
-     //we need to send the write enable FRAM command
-        
-        uint8_t txCode = FRAM_OP_WREN;
-        
-        SPI1_tx8(txCode);
-        
-        //now that this is complete, we can send data to write to the FRAM
+    writeEnable(true);
+  
+    FRAM_CS = 0; //select the chip (active low)
+    FRAM_HOLD = 1; //SPI command hold is off (active low)
+    FRAM_WP = 0; //write protect on
     
     uint16_t address = 0;
     
     for(address = FRAM_ADDRESS_START; address < FRAM_ADDRESS_END; address++)
-    {
- 
-        FRAM_CS = 0; //select the chip (active low)
-        FRAM_HOLD = 1; //SPI command hold is off (active low)
-        FRAM_WP = 1; //write protect on (active low)
-              
+    {    
         if(address = 0)
         {
             uint32_t txOpCode = FRAM_OP_WRITE;
@@ -396,7 +336,7 @@ static void fillFRAM(void)
             //|OPCODE|ADDRESS1|ADDRESS2|DATA
             txOpCode += address;
 
-            SPI1_tx32(txOpCode);
+            SPI1_tx32_ret(txOpCode);
 
             //for the first write command, we can send a 32 bit transmission
            
@@ -404,7 +344,7 @@ static void fillFRAM(void)
         else //after the first address, we can just send it byte by byte
         {
            uint8_t txDataByte = (address & 0x00FF);
-           SPI1_tx8(txDataByte);
+           SPI1_tx8_ret(txDataByte);
            
            
         }
@@ -413,7 +353,7 @@ static void fillFRAM(void)
     
     FRAM_CS = 1; //select the chip (active low)
     FRAM_HOLD = 1; //SPI command hold is off (active low)
-    FRAM_WP = 0; //write protect on
+    FRAM_WP = 1; //write protect on
     
 }
 

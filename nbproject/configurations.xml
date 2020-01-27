@@ -21,6 +21,14 @@
         <itemPath>src/application.h</itemPath>
       </logicalFolder>
       <logicalFolder name="f4" displayName="drivers" projectFiles="true">
+        <logicalFolder name="f4" displayName="adc" projectFiles="true">
+          <itemPath>src/adc.h</itemPath>
+          <itemPath>src/adc.c</itemPath>
+        </logicalFolder>
+        <logicalFolder name="f3" displayName="i2c" projectFiles="true">
+          <itemPath>src/i2c1.c</itemPath>
+          <itemPath>src/i2c1.h</itemPath>
+        </logicalFolder>
         <logicalFolder name="f2" displayName="spi" projectFiles="true">
           <itemPath>src/spi1.c</itemPath>
           <itemPath>src/spi1.h</itemPath>

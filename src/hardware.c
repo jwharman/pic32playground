@@ -40,6 +40,10 @@ void hardware_init(void)
     
     FRAM_init();
     
+    write8(0,0xA5);
+    write8(1,0x5A);
+    
+    
 }
 void hardware_service(void)
 {
@@ -67,7 +71,10 @@ static void sys_raw_io_config()
     ANSELD = 0;
     
     
-    //set TRIS B 14 to be input for SDI
+    //we will need to configure the pins we want for analog with ANSEL registers
+    
+    
+    //set TRIS B 14 to be input for SDI - SPI1
     TRISBbits.TRISB14 = 1; //make it an input
     
 }

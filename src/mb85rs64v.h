@@ -35,4 +35,7 @@ void FRAM_service(void);
 uint32_t readDeviceID(void);
 uint32_t readStatusRegister(void);
 
+void dumpFRAM(void);
+void fillFRAM(void);
+
 #endif

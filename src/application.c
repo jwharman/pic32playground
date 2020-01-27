@@ -32,16 +32,7 @@ void application_init(void)
     dataCounter = 0;
     
     printf("***Application Initialized***\r\n");
-    
-    //init the FRAM PINS to a good state
-    FRAM_HOLD = 1;
-    FRAM_CS = 1;
-    FRAM_WP = 0;
-    
-    address = 0;
-   
-    
-    
+
     
 }
 
@@ -49,20 +40,11 @@ void application_service(void)
 {
      if(user_timer_interval(&m_main_tmr, 100)) //every 100 ms
         {   
-            
-            //write8(1, 1);
          
-            uint32_t devID = readDeviceID();
-         
-            printf("Attempting to read device ID: 0x%lX\r\n", devID);
+           
+         pinState = !pinState;
             
-//            uint32_t status = readStatusRegister();
-//            
-//            printf("Attempting to read status register: 0x%lX\r\n", status);
          
-            pinState = !pinState;
-
-            
             
             counter++;
         }
